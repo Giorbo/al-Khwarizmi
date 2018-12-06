@@ -14,8 +14,8 @@ class avlLinkedList(Dictionary):
         self.b = b
         self.r = 6
         self.d = int((massimo-minimo)/b)
-        self.array = [None] * int((self.d+2))
-        self.counterList = [0]*(d+2)
+        self.array = [None] * (self.d+2)
+        self.counterList = [0]*(self.d+2)
 
     def insert(self, key, value):
         #index selection:
@@ -29,24 +29,27 @@ class avlLinkedList(Dictionary):
                 if (self.minimo+(j*self.b)) <= key < (self.minimo+(j+1)*self.b):
                     i = j
 		#check if array[i] is avlTree or linkedList
-        if type(self.array[i])=='dictionary.dictTrees.avlTree':
+        if isinstance(self.array[i], avl):
+            print('spippettone')
             self.array[i].insert(key, value)
             self.counterList[i] += 1
         else:
             if self.array[i] == None:
+                print('ye')
                 self.array[i] = linkedList()
                 self.array[i].insert(key,value)
                 self.counterList[i] += 1
             else:
+                print('dynamint')
                 self.array[i].insert(key,value)
                 self.counterList[i] += 1
                 #controllo se la lista ha più di r elementi
-                if self.array[i] >= self.r:
+                if self.counterList[i] >= self.r:
                     self.__linkedListToAvl(i)
 
 
     def __linkedListToAvl(self, index):
-        current = self.array[index].first
+        current = self.array[index].theList.first
         tempAvl = avl()
         while current != None:
             tempAvl.insert(current.elem[0], current.elem[1])
