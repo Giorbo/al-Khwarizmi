@@ -28,3 +28,12 @@ class avlLinkedList(Dictionary):
             for j in range(self.d - 1):
                 if (self.min+(j*self.b)) <= inputKey < (self.min+j+1):
                     i = j
+                    
+                    
+        if type(self.array[i])=='dictionary.dictTrees.avlTree':
+				do something
+			else:
+				if self.array[i] == None:
+					crea lista
+				else:
+					aggiungi alla lista 
