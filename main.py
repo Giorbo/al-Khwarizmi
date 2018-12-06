@@ -41,5 +41,14 @@ class avlLinkedList(Dictionary):
                 self.array[i].insert(key,value)
                 self.counterList[i] += 1
                 #controllo se la lista ha più di r elementi
+                if self.array[i] >= self.r:
+                    self.__linkedListToAvl(i)
 
-    def __linkedListToAvl(self, index): 
+
+    def __linkedListToAvl(self, index):
+        current = self.array[index].first
+        tempAvl = avl()
+        while current != None:
+            tempAvl.insert(current.elem[0], current.elem[1])
+            current = current.next
+        self.array[index] = tempAvl
