@@ -1,4 +1,4 @@
-from list.LinkedList import ListaCollegata as linkedList
+from dictionary.linkedListDictionary import LinkedListDictionary as linkedList
 from dictionary.dictTrees.avlTree import AVLTree as avl
 from dictionary.Dictionary import Dictionary
 
@@ -12,10 +12,12 @@ class avlLinkedList(Dictionary):
         self.minimo = minimo
         self.massimo = massimo
         self.b = b
+        self.r = 6
         self.d = int((massimo-minimo)/b)
         self.array = [None] * int((self.d+2))
+        self.counterList = [0]*(d+2)
 
-    def insertArray(self, key, value):
+    def insert(self, key, value):
         #index selection:
         #int i will be the index.
         if (key < self.minimo):
@@ -28,11 +30,16 @@ class avlLinkedList(Dictionary):
                     i = j
 		#check if array[i] is avlTree or linkedList
         if type(self.array[i])=='dictionary.dictTrees.avlTree':
-				#self.array[i].self.avl.insert(key, value)
-            pass
+            self.array[i].insert(key, value)
+            self.counterList[i] += 1
         else:
             if self.array[i] == None:
                 self.array[i] = linkedList()
-                self.array[i].addAsFirst((key,value))
+                self.array[i].insert(key,value)
+                self.counterList[i] += 1
             else:
-                self.array[i].addAsLast((key,value))
+                self.array[i].insert(key,value)
+                self.counterList[i] += 1
+                #controllo se la lista ha più di r elementi
+
+    def __linkedListToAvl(self, index): 
