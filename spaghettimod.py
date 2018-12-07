@@ -1,4 +1,4 @@
-from list.LinkedList import ListaCollegata as linkedList
+from dictionary.linkedListDictionary import LinkedListDictionary as linkedList
 from dictionary.dictTrees.avlTree import AVLTree as avl
 from dictionary.Dictionary import Dictionary
 
@@ -14,10 +14,8 @@ class avlLinkedList(Dictionary):
         self.b = b
         self.r = 6
         self.d = int((massimo-minimo)/b)
-        self.array = [None] * int((self.d+2))
-        #Modified
-        self.counterList = [0]*(d+2)
-        #endMod
+        self.array = [None] * (self.d+2)
+        self.counterList = [0]*(self.d+2)
 
     def insert(self, key, value):
         #index selection:
@@ -31,22 +29,38 @@ class avlLinkedList(Dictionary):
                 if (self.minimo+(j*self.b)) <= key < (self.minimo+(j+1)*self.b):
                     i = j
 		#check if array[i] is avlTree or linkedList
-        if type(self.array[i])=='dictionary.dictTrees.avlTree':
+        if isinstance(self.array[i], avl):
+            print('spippettone')
             self.array[i].insert(key, value)
-            #mod
             self.counterList[i] += 1
-            #mod
         else:
             if self.array[i] == None:
+                print('ye')
                 self.array[i] = linkedList()
-                self.array[i].addAsFirst((key,value))
-                #mod
+                self.array[i].insert(key,value)
                 self.counterList[i] += 1
-                #mod
             else:
-                self.array[i].addAsLast((key,value))
-                #mod
+                print('dynamint')
+                self.array[i].insert(key,value)
                 self.counterList[i] += 1
-                #mod
-                    
-    def linkedListToAvl(self, index):
+                #controllo se la lista ha più di r elementi
+                if self.counterList[i] >= self.r:
+                    self.__linkedListToAvl(i)
+
+
+    def __linkedListToAvl(self, index):
+        current = self.array[index].theList.first
+        tempAvl = avl()
+        while current != None:
+            tempAvl.insert(current.elem[0], current.elem[1])
+            current = current.next
+        self.array[index] = tempAvl
+
+    def __avlToLinkedList(self, index):
+        tempLinkedList = linkedList()
+        for i in range(self.counterList[index]):
+            rootKey = self.array[index].tree.root.info[0]
+            rootValue = self.array[index].tree.root.info[1]
+            tempLinkedList.insert(rootKey, rootValue)
+            self.array[index].delete(rootKey)
+        self.array[index] = tempLinkedList
