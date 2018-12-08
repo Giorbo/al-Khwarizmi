@@ -1,3 +1,6 @@
+#main da utilizzare per prove o per implementare funzioni non 'definitive'.
+
+
 from dictionary.linkedListDictionary import LinkedListDictionary as linkedList
 from dictionary.dictTrees.avlTree import AVLTree as avl
 from dictionary.Dictionary import Dictionary
