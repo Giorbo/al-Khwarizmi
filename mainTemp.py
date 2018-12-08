@@ -55,8 +55,10 @@ class avlLinkedList(Dictionary):
         #index selection:
         #int i will be the index.
         i = getIndex(self.massimo, self.minimo, self.b, self.d, key)
-
-        if isinstance(self.array[i], avl):
+        if self.counterList[i] == 1:
+            self.array[i] = None
+            self.counterList[i] = 0
+        elif isinstance(self.array[i], avl):
             self.array[i].delete(key)
             self.counterList[i] -= 1
             #check if counterList has more than r elements
@@ -89,3 +91,4 @@ class avlLinkedList(Dictionary):
             tempLinkedList.insert(rootKey, rootValue)
             self.array[index].delete(rootKey)
         self.array[index] = tempLinkedList
+
