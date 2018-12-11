@@ -33,17 +33,6 @@ class avlLinkedList(Dictionary):
         self.array = [None] * (self.d+2)
         self.counterList = [0]*(self.d+2)
 
-    def __getIndex(self, key):
-        if (key < self.minimo):
-            i = self.d
-        elif (key >= self.massimo):
-            i = self.d + 1
-        else:
-            for j in range(self.d):
-                if (self.minimo+(j*self.b)) <= key < (self.minimo+(j+1)*self.b):
-                    i = j
-        return i
-
     def insert(self, key, value):
         #index selection:
         #int i will be the index.
@@ -73,6 +62,17 @@ class avlLinkedList(Dictionary):
         i = self.__getIndex(key)
         assert(isinstance(self.array[i], linkedList) or isinstance(self.array[i], avl)),"Error, the selected item can't be found in an existing set"
         return self.array[i].search(key)
+
+    def __getIndex(self, key):
+        if (key < self.minimo):
+            i = self.d
+        elif (key >= self.massimo):
+            i = self.d + 1
+        else:
+            for j in range(self.d):
+                if (self.minimo+(j*self.b)) <= key < (self.minimo+(j+1)*self.b):
+                    i = j
+        return i
 
     def __linkedListToAvl(self, index):
         current = self.array[index].theList.first
