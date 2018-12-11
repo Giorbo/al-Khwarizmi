@@ -64,17 +64,28 @@ class avlLinkedList(Dictionary):
         return self.array[i].search(key)
 
     def __getIndex(self, key):
+        """
+        Questo metodo ausiliario calcola e ritorna l'indice Bi a partire dalla key.
+        :param key:
+        :return index:
+        """
         if (key < self.minimo):
-            i = self.d
+            index = self.d
         elif (key >= self.massimo):
-            i = self.d + 1
+            index = self.d + 1
         else:
-            for j in range(self.d):
-                if (self.minimo+(j*self.b)) <= key < (self.minimo+(j+1)*self.b):
-                    i = j
-        return i
+            for i in range(self.d):
+                if (self.minimo+(i*self.b)) <= key < (self.minimo+(i+1)*self.b):
+                    index = i
+        return index
 
     def __linkedListToAvl(self, index):
+        """
+        Questo metodo ausiliario trasforma il dizionario basato su lista collegata in
+        un dizionario basato su albero avl
+        :param index:
+        :return:
+        """
         current = self.array[index].theList.first
         tempAvl = avl()
         while current != None:
@@ -83,6 +94,10 @@ class avlLinkedList(Dictionary):
         self.array[index] = tempAvl
 
     def __avlToLinkedList(self, index):
+        """
+        Questo metodo ausiliario trasforma il dizionario basato su albero avl in
+        un dizionario basato su lista collegata
+        """
         tempLinkedList = linkedList()
         for i in range(self.counterList[index]):
             rootKey = self.array[index].tree.root.info[0]
