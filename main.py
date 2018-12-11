@@ -1,3 +1,16 @@
+"""
+    File name: AvlLinkedList.py
+    Author: Francesco Lasco && Giorgio Luciano Liberatore
+    Date created: 01/12/2018
+    Date last modified: 14/12/2018
+    Python Version: 3.7
+
+    Questo modulo contiene la classe AvlLinkedList che rappresenta
+    una struttura di dati che organizza dizionari costruiti con
+    alberi AVL e liste collegate.
+"""
+
+
 from dictionary.linkedListDictionary import LinkedListDictionary as linkedList
 from dictionary.dictTrees.avlTree import AVLTree as avl
 from dictionary.Dictionary import Dictionary
