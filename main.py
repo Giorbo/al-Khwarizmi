@@ -15,7 +15,6 @@ from dictionary.linkedListDictionary import LinkedListDictionary as linkedList
 from dictionary.dictTrees.avlTree import AVLTree as avl
 from dictionary.Dictionary import Dictionary
 
-
 class avlLinkedList(Dictionary):
     """
     Questa classe implementa un dizionario composto da un array che punta ad altre strutture dati.
