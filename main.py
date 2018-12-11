@@ -4,6 +4,10 @@ from dictionary.Dictionary import Dictionary
 
 
 class avlLinkedList(Dictionary):
+    """
+    Questa classe implementa un dizionario composto da un array che punta ad altre strutture dati.
+    Le strutture (lista concatenata/albero avl) cambiano in base al numero di elementi presenti.
+    """
     def __init__(self, minimo, massimo, b):
         assert (massimo > minimo), "massimo deve essere maggiore di minimo."
         assert (b > 6), "b deve essere maggiore di 6."
