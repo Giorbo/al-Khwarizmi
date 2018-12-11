@@ -2,26 +2,12 @@ from dictionary.linkedListDictionary import LinkedListDictionary as linkedList
 from dictionary.dictTrees.avlTree import AVLTree as avl
 from dictionary.Dictionary import Dictionary
 
-# Functions:
-
-def getIndex(massimo, minimo, b, d, key):
-    if (key < minimo):
-        i = d
-    elif (key >= massimo):
-        i = d + 1
-    else:
-        for j in range(d - 1):
-            if (minimo+(j*b)) <= key < (minimo+(j+1)*b):
-                i = j
-    return i
-
 
 class avlLinkedList(Dictionary):
     def __init__(self, minimo, massimo, b):
         assert (massimo > minimo), "massimo deve essere maggiore di minimo."
         assert (b > 6), "b deve essere maggiore di 6."
         assert ((abs(massimo - minimo)%b) == 0), "|massimo - minimo| deve essere multiplo di b."
-
         self.minimo = minimo
         self.massimo = massimo
         self.b = b
@@ -30,11 +16,21 @@ class avlLinkedList(Dictionary):
         self.array = [None] * (self.d+2)
         self.counterList = [0]*(self.d+2)
 
+    def __getIndex(self, key):
+        if (key < self.minimo):
+            i = self.d
+        elif (key >= self.massimo):
+            i = self.d + 1
+        else:
+            for j in range(self.d):
+                if (self.minimo+(j*self.b)) <= key < (self.minimo+(j+1)*self.b):
+                    i = j
+        return i
+
     def insert(self, key, value):
         #index selection:
         #int i will be the index.
-        i = getIndex(self.massimo, self.minimo, self.b, self.d, key)
-
+        i = self.__getIndex(key)
         if self.array[i] == None:
         	self.array[i] = linkedList()
         self.array[i].insert(key, value)
@@ -45,7 +41,7 @@ class avlLinkedList(Dictionary):
     def delete(self, key):
         #index selection:
         #int i will be the index.
-        i = getIndex(self.massimo, self.minimo, self.b, self.d, key)
+        i = self.__getIndex(key)
         assert(self.array[i] != None), "key not in data structure."
         if self.counterList[i] == 1:
             self.array[i] = None
@@ -53,16 +49,13 @@ class avlLinkedList(Dictionary):
         else:
             self.array[i].delete(key)
             self.counterList[i] -= 1
-
             if self.counterList[i] == self.r - 1:
                 self.__avlToLinkedList(i)
 
-
     def search(self, key):
-        i = getIndex(self.massimo, self.minimo, self.b, self.d, key)
+        i = self.__getIndex(key)
         assert(isinstance(self.array[i], linkedList) or isinstance(self.array[i], avl)),"Error, the selected item can't be found in an existing set"
         return self.array[i].search(key)
-
 
     def __linkedListToAvl(self, index):
         current = self.array[index].theList.first
@@ -80,4 +73,3 @@ class avlLinkedList(Dictionary):
             tempLinkedList.insert(rootKey, rootValue)
             self.array[index].delete(rootKey)
         self.array[index] = tempLinkedList
-
