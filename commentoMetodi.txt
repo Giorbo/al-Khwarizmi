@@ -1,0 +1,19 @@
+__linkedListToAvl:
+Questo metodo è stato implementato per trasformare una lista collegata in albero avl: prende come parametro 
+l'indice, restituito dal metodo __getIndex, della struttura da cambiare. 
+Scorre tutti gli elementi della lista collegata e li inserisce, uno alla volta, in un albero avl
+temporaneo. Infine viene sostituita la lista collegata con l'albero avl appena creato.
+
+
+__avlToLinkedList:
+Questo metodo è l'inverso di __linkedListToAvl ma è stato implementato in maniera diversa: prende sempre
+come parametro l'indice restituito dal metodo __getIndex ma utilizza anche la lista counterList per
+scorrere tutti gli elementi dell'albero tramite un ciclo for, tramite il quale vengono sempre estratti
+chiave e valore della radice. Successivamente le chiavi e i valori vengono inseriti ,uno ad uno, in una
+lista collegata temporanea di supporto ed infine viene cancellata la radice, poi si sostituisce l'albero
+avl con la lista temporanea.
+
+insert:
+Con questo metodo vengono inserite le coppie (key, value). Per prima cosa viene chiamata il metodo
+__getIndex per individuare a quale posizione dell'array verrà inserito il valore in base alla chiave.
+Viene effettuato un controllo per verificare che la struttura dati puntata dall'indice non sia vuota (in quel caso viene creata una lista collegata) e si richiama il metodo insert della struttura dati corrispondente automaticamente.
