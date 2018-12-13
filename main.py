@@ -15,15 +15,19 @@ from dictionary.linkedListDictionary import LinkedListDictionary as linkedList
 from dictionary.dictTrees.avlTree import AVLTree as avl
 from dictionary.Dictionary import Dictionary
 
-class avlLinkedList(Dictionary):
+class AvlLinkedList(Dictionary):
     """
     Questa classe implementa un dizionario composto da un array che punta ad altre strutture dati.
     Le strutture (lista concatenata/albero avl) cambiano in base al numero di elementi presenti.
     """
     def __init__(self, minimo, massimo, b):
-        assert (massimo > minimo), "massimo deve essere maggiore di minimo."
-        assert (b > 6), "b deve essere maggiore di 6."
-        assert ((abs(massimo - minimo)%b) == 0), "|massimo - minimo| deve essere multiplo di b."
+        try:
+            assert (massimo > minimo), "min should be less than max!"
+            assert (b > 6), "b must be grater than r(6)!"
+            assert ((abs(massimo - minimo)%b) == 0), "max-min should be a multiple of b!"
+        except AssertionError as myError:
+            print(myError)
+            return
         self.minimo = minimo
         self.massimo = massimo
         self.b = b
@@ -47,19 +51,25 @@ class avlLinkedList(Dictionary):
         #index selection:
         #int i will be the index.
         i = self.__getIndex(key)
-        assert(self.array[i] != None), "key not in data structure."
+        try:
+        	assert(self.array[i] != None), "The corrispective data structure is empty!"
+        except AssertionError as myError:
+        	print(myError)
+        	return
         if self.array[i].search(key):
             self.array[i].delete(key)
             self.counterList[i] -= 1
             if self.counterList[i] == 0:
                 self.array[i] = None
                 self.counterList[i] -= 1
-        else:
-            print("Non trovata")
 
     def search(self, key):
         i = self.__getIndex(key)
-        assert(isinstance(self.array[i], linkedList) or isinstance(self.array[i], avl)),"Error, the selected item can't be found in an existing set"
+        try:
+            assert(isinstance(self.array[i], linkedList) or isinstance(self.array[i], avl)), "The corrispective data structure is empty!"
+        except AssertionError as myError:
+            print(myError)
+            return
         return self.array[i].search(key)
 
     def __getIndex(self, key):
