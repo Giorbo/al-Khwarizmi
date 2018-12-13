@@ -114,3 +114,30 @@ class AvlLinkedList(Dictionary):
             tempLinkedList.insert(rootKey, rootValue)
             self.array[index].delete(rootKey)
         self.array[index] = tempLinkedList
+
+if __name__ == "__main__":
+    minimo = 88
+    
+    massimo = 12454
+    
+    b = 9
+
+    test = AvlLinkedList(minimo, massimo, b)
+
+    print("Creata l'istanza 'test' di AvlLinkedList.")
+
+    data = [0, -10, -1000, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 100000000000]
+
+    for d in data:
+        test.insert(d, d*2)
+        print(f"Inserita la coppia: ({d}, {d*2})")
+
+    for s in data:
+        print(f"Il metodo search con key:{s} ritorna {test.search(s)}")
+
+    for d in data:
+        test.delete(d)
+        print(f"Eliminata la coppia con chiave {d}")
+
+    print ("L'istanza di AvlLinkedList ora è vuota.")
+
