@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>graph_data</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-11"><meta name="DC.source" content="graph_data.m"><style type="text/css">
+      --><title>graph_data</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-13"><meta name="DC.source" content="graph_data.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -73,11 +73,12 @@ Dic1Path = fullfile(<span class="string">'Performance'</span>,<span class="strin
 Dic2Path = fullfile(<span class="string">'Performance'</span>,<span class="string">'performanceDic2.txt'</span>);
 
 <span class="comment">%graph limits:</span>
-plotLimits1 = [-Inf Inf -0.05 Inf];
-plotLimits2 = [-Inf Inf -0.1 Inf];
+plotLimits1 = [-Inf Inf -0.00001 Inf];
+plotLimits2 = [-Inf Inf -0.00001 Inf];
 
 figure
 
+subplot(3,2,[1,4]);
 AVL1ID = fopen(AVL1Path);
 Dic1ID = fopen(Dic1Path);
 AVL1Scan = textscan(AVL1ID,<span class="string">'%u %f'</span>);
@@ -86,12 +87,22 @@ fclose(AVL1ID);
 fclose(Dic1ID);
 plot(AVL1Scan{1},AVL1Scan{2},Dic1Scan{1},Dic1Scan{2},<span class="string">'--'</span>)
 title(<span class="string">'AVLLinkedList vs Python Dictionary: delete.'</span>);
-xlabel(<span class="string">'N: number of elements.'</span>);
+<span class="comment">%xlabel('N: number of elements.');</span>
 ylabel(<span class="string">'Time: seconds.'</span>);
 axis(plotLimits1);
+grid <span class="string">on</span>;
+
+subplot(3,2,[5,6])
+plot(Dic1Scan{1},Dic1Scan{2},<span class="string">'r'</span>);
+xlabel(<span class="string">'N: number of elements.'</span>);
+ylabel(<span class="string">'T'</span>);
+grid <span class="string">on</span>;
+title(<span class="string">'Zoom on Python Dic. performance.'</span>);
+
 
 figure
 
+subplot(3,2,[1,4]);
 AVL2ID = fopen(AVL2Path);
 Dic2ID = fopen(Dic2Path);
 AVL2Scan = textscan(AVL2ID,<span class="string">'%u %f'</span>);
@@ -100,9 +111,17 @@ fclose(AVL2ID);
 fclose(Dic2ID);
 plot(AVL2Scan{1},AVL2Scan{2},Dic2Scan{1},Dic2Scan{2},<span class="string">'--'</span>)
 title(<span class="string">'AVLLinkedList vs Python Dictionary: find.'</span>);
-xlabel(<span class="string">'N: number of elements.'</span>);
+<span class="comment">%xlabel('N: number of elements.');</span>
 ylabel(<span class="string">'Time: seconds.'</span>);
 axis(plotLimits2);
+grid <span class="string">on</span>;
+
+subplot(3,2,[5,6]);
+plot(Dic2Scan{1},Dic2Scan{2},<span class="string">'r'</span>);
+xlabel(<span class="string">'N: number of elements.'</span>);
+ylabel(<span class="string">'T'</span>);
+grid <span class="string">on</span>;
+title(<span class="string">'Zoom on Python Dic. performance.'</span>)
 </pre><img vspace="5" hspace="5" src="graph_data_01.png" alt=""> <img vspace="5" hspace="5" src="graph_data_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 
@@ -113,11 +132,12 @@ Dic1Path = fullfile('Performance','performanceDic1.txt');
 Dic2Path = fullfile('Performance','performanceDic2.txt');
 
 %graph limits:
-plotLimits1 = [-Inf Inf -0.05 Inf];
-plotLimits2 = [-Inf Inf -0.1 Inf];
+plotLimits1 = [-Inf Inf -0.00001 Inf];
+plotLimits2 = [-Inf Inf -0.00001 Inf];
 
 figure
 
+subplot(3,2,[1,4]);
 AVL1ID = fopen(AVL1Path);
 Dic1ID = fopen(Dic1Path);
 AVL1Scan = textscan(AVL1ID,'%u %f');
@@ -126,12 +146,22 @@ fclose(AVL1ID);
 fclose(Dic1ID);
 plot(AVL1Scan{1},AVL1Scan{2},Dic1Scan{1},Dic1Scan{2},'REPLACE_WITH_DASH_DASH')
 title('AVLLinkedList vs Python Dictionary: delete.');
-xlabel('N: number of elements.');
+%xlabel('N: number of elements.');
 ylabel('Time: seconds.');
 axis(plotLimits1);
+grid on;
+
+subplot(3,2,[5,6])
+plot(Dic1Scan{1},Dic1Scan{2},'r');
+xlabel('N: number of elements.');
+ylabel('T');
+grid on;
+title('Zoom on Python Dic. performance.');
+
 
 figure
 
+subplot(3,2,[1,4]);
 AVL2ID = fopen(AVL2Path);
 Dic2ID = fopen(Dic2Path);
 AVL2Scan = textscan(AVL2ID,'%u %f');
@@ -140,9 +170,31 @@ fclose(AVL2ID);
 fclose(Dic2ID);
 plot(AVL2Scan{1},AVL2Scan{2},Dic2Scan{1},Dic2Scan{2},'REPLACE_WITH_DASH_DASH')
 title('AVLLinkedList vs Python Dictionary: find.');
-xlabel('N: number of elements.');
+%xlabel('N: number of elements.');
 ylabel('Time: seconds.');
 axis(plotLimits2);
+grid on;
+
+subplot(3,2,[5,6]);
+plot(Dic2Scan{1},Dic2Scan{2},'r');
+xlabel('N: number of elements.');
+ylabel('T');
+grid on;
+title('Zoom on Python Dic. performance.')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##### SOURCE END #####
