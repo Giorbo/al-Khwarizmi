@@ -48,14 +48,14 @@ class avlLinkedList(Dictionary):
         #int i will be the index.
         i = self.__getIndex(key)
         assert(self.array[i] != None), "key not in data structure."
-        if self.counterList[i] == 1:
-            self.array[i] = None
-            self.counterList[i] = 0
-        else:
+        if self.array[i].search(key):
             self.array[i].delete(key)
             self.counterList[i] -= 1
-            if self.counterList[i] == self.r - 1:
-                self.__avlToLinkedList(i)
+            if self.counterList[i] == 0:
+                self.array[i] = None
+                self.counterList[i] -= 1
+        else:
+            print("Non trovata")
 
     def search(self, key):
         i = self.__getIndex(key)
