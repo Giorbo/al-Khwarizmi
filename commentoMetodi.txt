@@ -23,7 +23,13 @@ viene richiamato il metodo __linkedListToAvl per trasformare la struttura dati i
 
 delete:
 Questo metodo permette di cancellare una chiave e il relativo valore dalla struttura dati.
-Per prima cosa si controlla che la struttura dati puntata dalla chiave non sia vuota, altrimenti si solleva un errore. Si fa un ulteriore controllo per vedere se nella struttura dati è presente solo l'elemento da cancellare, in caso affermativo si assegna al valore della struttra dati None e si resetta la counterList degli elementi. In caso contrario si elimina l'elemento e si riduce la counterList di 1. Nel caso in cui la counterList dopo una cancellazione sia uguale ad r-1 si richiama il metodo __avlToLinkedList per trasformare la struttra dati in una lista collegata.
+Per prima cosa si controlla che la struttura dati puntata dalla chiave non sia vuota, altrimenti si solleva un errore. 
+Si fa un ulteriore controllo per vedere se nella struttura dati è presente solo l'elemento da cancellare, in caso affermativo si assegna al valore della struttra dati None e si resetta la counterList degli elementi. 
+In caso contrario si elimina l'elemento e si riduce la counterList di 1. 
+Nel caso in cui la counterList dopo una cancellazione sia uguale ad r-1 si richiama il metodo __avlToLinkedList per trasformare la struttra dati in una lista collegata.
 
 search:
-Questo è il metodo che permette di ritornare un valore presente nel dizionario a partire da una chiave. Prende come parametro la chiave e calcola l'indice della struttura dati corrispondente attraverso la funzione __getIndex. Viene fatto un controllo per verificare che la struttura dati puntata non sia vuota. Poi si ritorna semplicemente il risultato della funzione search della struttura dati corrispondente.
+Questo è il metodo che permette di ritornare un valore presente nel dizionario a partire da una chiave.
+Prende come parametro la chiave e calcola l'indice della struttura dati corrispondente attraverso la funzione __getIndex.
+Viene fatto un controllo per verificare che la struttura dati puntata non sia vuota.
+Poi si ritorna semplicemente il risultato della funzione search della struttura dati corrispondente.
